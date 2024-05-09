@@ -348,7 +348,7 @@ impl Updater {
         // necessary if no cargo-dist-style install receipt exists.
         updater.set_release_source(ReleaseSource {
             release_type: ReleaseSourceType::GitHub,
-            owner: "getgrit".to_owned(),
+            owner: "axodotdev".to_owned(),
             name: "gritql".to_owned(),
             app_name: app.get_base_name(),
         });
@@ -770,7 +770,7 @@ pub async fn check_release_axo(
     }
     updater.set_release_source(ReleaseSource {
         release_type: ReleaseSourceType::GitHub,
-        owner: "getgrit".to_owned(),
+        owner: "axodotdev".to_owned(),
         name: "gritql".to_owned(),
         app_name: app.get_base_name(),
     });
