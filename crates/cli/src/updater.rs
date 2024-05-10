@@ -352,7 +352,9 @@ impl Updater {
             name: "gritql".to_owned(),
             app_name: app.get_base_name(),
         });
-        updater.set_install_dir(&self.install_path.to_string_lossy());
+        updater.configure_version_specifier(axoupdater::UpdateRequest::LatestMaybePrerelease);
+        // add bin/bin/ so that the updater (which will pop one bin/) installs to bin/
+        updater.set_install_dir(&self.install_path.join("bin").join("bin").to_string_lossy());
         match updater.run().await {
             Ok(result) => {
                 if let Some(outcome) = result {
@@ -774,6 +776,7 @@ pub async fn check_release_axo(
         name: "gritql".to_owned(),
         app_name: app.get_base_name(),
     });
+    updater.configure_version_specifier(axoupdater::UpdateRequest::LatestMaybePrerelease);
     let update_needed = updater.is_update_needed().await?;
     let new_version = updater.query_new_version().await?.map(|v| v.to_string());
     Ok((update_needed, new_version))
