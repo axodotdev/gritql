@@ -604,6 +604,8 @@ impl Updater {
         }
         let bin_name = app_name.get_base_name();
         let bin_path = self.bin_path.join(bin_name);
+        #[cfg(windows)]
+        let bin_path = bin_path.with_extension("exe");
         Ok(bin_path)
     }
 
