@@ -353,8 +353,8 @@ impl Updater {
             app_name: app.get_base_name(),
         });
         updater.configure_version_specifier(axoupdater::UpdateRequest::LatestMaybePrerelease);
-        // add bin/bin/ so that the updater (which will pop one bin/) installs to bin/
-        updater.set_install_dir(&self.install_path.join("bin").join("bin").to_string_lossy());
+        // add bin/ since axoupdater wants to know where bins go
+        updater.set_install_dir(&self.install_path.join("bin").to_string_lossy());
         match updater.run().await {
             Ok(result) => {
                 if let Some(outcome) = result {
